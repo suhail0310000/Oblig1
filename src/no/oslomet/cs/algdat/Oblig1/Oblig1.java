@@ -121,9 +121,7 @@ public class Oblig1 {
     public static void delsortering(int[] a){
         int oddetall = 0;
         for(int i = 0; i<a.length; i++){
-            if(a[i]%2!=0){
-                bytt();
-            }
+            
         }//Fikk ikke til oppgave 4, grunnet tidspress
     }
 
@@ -141,6 +139,7 @@ public class Oblig1 {
 
     }
 }
+
 
 
 
