@@ -2,6 +2,8 @@ package no.oslomet.cs.algdat.Oblig1;
 
 import java.util.NoSuchElementException;
 
+import static no.oslomet.cs.algdat.Oblig1.Oblig1Test.bytt;
+
 public class Oblig1 {
      //Oppg1
     /* Når blir det flest ombyttinger?
@@ -89,41 +91,54 @@ public class Oblig1 {
         }
         return unikeElementer;
     }
-    //oppg4 FIKK IKKE TIL DENNE OPPGAVEN PGA TIDSPRESS, men strategien var å finne en skillverdi,
-    // dele arrayet i to i frohold til denne skilleverdien, også sortere dem deretter
-    public static int del1(int[] a,int f,int s){
-        int skilleverdi = a[s];
-        int i = (f-1);
-        for(int j = f; j<s; j++){
-            if(a[j]<skilleverdi){
-                i++;
 
+    //OPPGAVE4
+    public static int partisjonering(int a[], int f, int s)
+    {
+        int pivot = a[s]; //skilleverdi, setter den tilslutt
+        int i = (f-1);
+        for (int j = f; j < s; j++) {
+
+            if (a[j] < pivot) // Hvis det vi itererer med er mindre enn skilleverdi
+            {
+                i++;
+                // invertering->nesten lik bubblesort -> bytter a[i] med a[j]
                 int temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
             }
         }
 
-        int temp = a[i+1];
+        int temp = a[i+1]; //Setter skilleverdien tilbake
         a[i+1] = a[s];
         a[s] = temp;
         return i+1;
     }
 
-    public static void del2(int[] a, int v,int h){
-        if(v>=h){
+    public static void partisjonering2(int[] a, int f, int s)
+    {
+        if (f >= s){
             return;
         }
-        int k = del1(a,v,h);
-        del2(a,v,k-1);
-        del2(a,k+1,h);
+        int k = partisjonering(a, f, s);
+        partisjonering2(a, f, k - 1);     // sorterer venstre side av intervallet
+        partisjonering2(a, k + 1, s);     // sorterer høyre side av intervallet
     }
+
     public static void delsortering(int[] a){
         int oddetall = 0;
-        for(int i = 0; i<a.length; i++){
-            
-        }//Fikk ikke til oppgave 4, grunnet tidspress
+        for(int i = 0; i < a.length; i++){
+            if(a[i] % 2 != 0){ //mod operator, alt som deles med to og får rest er ikke partall
+                bytt(a,i,oddetall);
+                oddetall++;
+            }
+        }
+        //kjører partisjoneringsmetodene
+        partisjonering2(a,0,oddetall-1);
+        partisjonering2(a,oddetall,a.length-1);
     }
+
+
 
     //oppg5
     public static void rotasjon(char[] a){
@@ -138,6 +153,8 @@ public class Oblig1 {
         a[0] = siste;//siste verdien blir den første
 
     }
+
+
 }
 
 
