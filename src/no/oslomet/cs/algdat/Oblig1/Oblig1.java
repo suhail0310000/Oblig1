@@ -154,7 +154,43 @@ public class Oblig1 {
 
     }
 
+    //Oppg7a
+    public static String flett(String s, String t){
+        String[] s_arr = s.split("");
+        String[] t_arr = t.split("");
+        String outPT = ""; //tom tekstreng for -> concat
+        int i = 0, j = 0;
+        while (i < s_arr.length && j < t_arr.length){ //imens vi itererer, gjelder:
+            outPT += s_arr[i++];
+            outPT += t_arr[j++];
+        }
+        //resterende
+        while (i < s.length()) outPT += s_arr[i++];
+        while (j < t.length()) outPT += t_arr[j++];
+        return outPT;
+    }
 
+    //Oppg7b
+    public static String flett(String... s){
+        if(s.length == 0){
+            return "";
+        }
+        String output = "";
+        boolean sjekk = true;
+        int i = 0;
+        while(sjekk) {
+            sjekk = false;
+            for (int j = 0; j < s.length; j++) {
+                String[] as = s[j].split("");
+                if(as.length > i) {
+                    output += as[i];
+                    sjekk = true;
+                }
+            }
+            i++;
+        }
+        return output;
+    }
 }
 
 
